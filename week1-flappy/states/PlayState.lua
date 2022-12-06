@@ -122,15 +122,21 @@ end
 
 function PlayState:render()
 
+    for k, pair in pairs(self.pipePairs) do
+        pair:render()
+    end
+
+    love.graphics.setFont(flappyFont)
+    love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
+
+    self.bird:render()
+    
+    -- Adds paused text if game is paused
     if self.pause then
-        for k, pair in pairs(self.pipePairs) do
-            pair:render()
-        end
-
+        love.graphics.setFont(hugeFont)
+        love.graphics.printf('Paused', 0, 120, VIRTUAL_WIDTH, 'center')
         love.graphics.setFont(flappyFont)
-        love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
-
-        self.bird:render()
+        love.graphcics.printf('Press \'p\' to continue flapping', 0, 120, VIRTUAL_WIDTH, 'center')
     end
 end
 
