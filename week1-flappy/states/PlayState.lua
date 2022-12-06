@@ -30,10 +30,19 @@ function PlayState:init()
 end
 
 function PlayState:update(dt)
+    
+    -- if game is paused display paused text and give option to unpause
+    if self.pause then
+        if love.keyboard.wasPressed('p') then
+            self.pause = false
+        end
+         
+    end
+    
+    -- if game isn't paused run as normal
     if not self.pause then
         if love.keyboard.wasPressed('p') then
             self.pause = true
-            gStateMachine:change('pause')
         end
 
         -- update timer for pipe spawning
